@@ -1,11 +1,27 @@
+import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify'
+
+import Searchbar from './components/Searchbar';
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>hi</h1>
-    </div>
-  );
-}
+export default class App extends Component {
+  state = {
+    pictureName: "",
+  } 
+   
+  handleSearchSubmit = pictureName => {
+    this.setState({pictureName})
+  }
 
-export default App;
+  render() { 
+    return (
+      <div>
+        <Searchbar onSearchSubmit={this.handleSearchSubmit} />
+
+
+        <ToastContainer autoClose={3000} />
+      </div>
+    );
+  }
+}
+ 
