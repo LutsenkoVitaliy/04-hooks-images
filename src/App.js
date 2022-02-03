@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToastContainer } from 'react-toastify'
+
 
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery'
@@ -16,11 +16,11 @@ export default class App extends Component {
 
   render() { 
     return (
-      <div>
+      <div className='App'>
+
+
         <Searchbar onSearchSubmit={this.handleSearchSubmit} />
         <ImageGallery pictureName={this.state.pictureName}/>
-
-        <ToastContainer autoClose={3000} />
       </div>
     );
   }
