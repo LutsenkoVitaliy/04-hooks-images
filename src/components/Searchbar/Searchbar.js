@@ -17,7 +17,7 @@ class Searchbar extends Component {
     event.preventDefault();
 
     if (this.state.pictureName.trim() === '') {
-      toast.error("Введите имя!");
+      alert("Введите имя!");
       return;
     }
 

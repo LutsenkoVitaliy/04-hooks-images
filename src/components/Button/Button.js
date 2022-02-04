@@ -5,7 +5,7 @@ import './Button.css';
 export default function Button({onLoadMore}) {
   return (
     <button
-      className="Button"
+      className="loadMore__button"
       type="button"
       onClick={onLoadMore}>
       Load more

@@ -5,6 +5,7 @@ import "./ImageGallery.css"
 import ImageGalleryItem from "./ImageGalleryItem";
 import Loader from "../Loader"
 import Button from "../Button";
+import api from "../../services/pixabayAPI"
 
 class ImageGallery extends Component {
   state = {
@@ -14,47 +15,45 @@ class ImageGallery extends Component {
     status: 'idle'
   } 
 
-  onLoadMore = () => {
-    this.setState((prevState) => {
-      return {
-        page: prevState.page + 1,
-      };
-    });
-  };
   
   componentDidUpdate(prevProps, prevState) {
     const prevName = prevProps.pictureName;
-    const nextName = this.props.pictureName
+    const nextName = this.props.pictureName;
+    const prevPage = prevState.page;
+    const nextPage = this.state.page;
 
     if ( prevName !== nextName) {
       this.setState({ status: 'pending'})
-
-      fetch(`https://pixabay.com/api/?q=${this.props.pictureName}&page=1&key=24021062-33a986e16cffce2cd7c29eb8f&image_type=photo&orientation=horizontal&per_page=12`)
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          }
-          
-          return Promise.reject(
-            new Error(`Error search result, try again`)
-          );
-        })
+      
+      api
+        .fetchPicture(nextName, 1)
         .then((data) => {
           this.setState({
-            pictures:
-              this.state.page > 1
-              ? [...prevState.pictures, ...data.hits]
-              : data.hits,
+            pictures: data.hits,
             status: 'resolved'
           })
+          if (data.total === 0) {return Promise.reject( new Error(`Error search result, try again`))}
       })
       .catch(error => this.setState({ error, status: 'rejected' }))
     };
+
     
-    
+    if (prevPage !== nextPage) {
+      api.fetchPicture(nextName, nextPage)
+      .then((data) => {
+        this.setState(
+          { pictures: nextPage > 1 ? [...prevState.pictures, ...data.hits] : data.hits })
+      })
+        .catch(error => this.setState({ error, status: 'rejected' }))
+      
+    }
   }
 
-   
+  onLoadMore() {
+    this.setState((prevState) => ({
+      page: prevState.page + 1,
+    }));
+  };
 
   render() { 
     const { pictures, error, status } = this.state
@@ -77,8 +76,8 @@ class ImageGallery extends Component {
       <>
         <ul className="ImageGallery">
         <ImageGalleryItem pictures={pictures}/>
-        </ul>
-        <Button onLoadMore={this.onLoadMore}/>
+          </ul>
+          <Button onLoadMore={() => this.onLoadMore()}/>
       </> 
       )
     }
