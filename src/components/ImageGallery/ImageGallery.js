@@ -74,7 +74,7 @@ class ImageGallery extends Component {
     if (status === 'resolved') {
       return (
       <>
-        <ul className="ImageGallery">
+        <ul className="imageGallery_list">
         <ImageGalleryItem pictures={pictures} openModalIMG={this.props.openModalIMG} />
           </ul>
           <Button onLoadMore={() => this.onLoadMore()}/>

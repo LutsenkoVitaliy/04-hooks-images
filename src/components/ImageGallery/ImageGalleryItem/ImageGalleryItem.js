@@ -5,7 +5,7 @@ export default function ImageGalleryItem ({pictures, openModalIMG}) {
   return pictures.map(({ id, webformatURL, largeImageURL }) => (
     <li key={id} className="gallery-item" >
       <img
-        className="ImageGalleryItem-image"
+        className="imageGalleryItem-image"
         src={webformatURL}
         alt={`img №${id}`}
         data-url={largeImageURL}
