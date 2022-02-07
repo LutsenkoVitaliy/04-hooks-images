@@ -75,7 +75,7 @@ class ImageGallery extends Component {
       return (
       <>
         <ul className="ImageGallery">
-        <ImageGalleryItem pictures={pictures}/>
+        <ImageGalleryItem pictures={pictures} openModalIMG={this.props.openModalIMG} />
           </ul>
           <Button onLoadMore={() => this.onLoadMore()}/>
       </> 

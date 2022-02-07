@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import "./ImageGalleryItem.css"
 
-export default function ImageGalleryItem ({pictures}) {
+export default function ImageGalleryItem ({pictures, openModalIMG}) {
   return pictures.map(({ id, webformatURL, largeImageURL }) => (
     <li key={id} className="gallery-item" >
       <img
@@ -9,6 +9,7 @@ export default function ImageGalleryItem ({pictures}) {
         src={webformatURL}
         alt={`img №${id}`}
         data-url={largeImageURL}
+        onClick={openModalIMG}
       />
       </li>
   ));
@@ -16,5 +17,5 @@ export default function ImageGalleryItem ({pictures}) {
 
 ImageGalleryItem.propTypes = {
   pictures: PropTypes.array.isRequired,
-  
+  openModalIMG: PropTypes.func
 } 
