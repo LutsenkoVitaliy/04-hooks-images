@@ -18,7 +18,6 @@ export default function Modal({ onClose, children }) {
     }
   };
   
-
   // componentDidMount() {
   //   window.addEventListener('keydown', this.handleKeyDown)
   // };
