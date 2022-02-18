@@ -76,18 +76,6 @@ export default function ImageGallery({pictureName, openModalIMG}) {
     
   }, [pictureName, page])
   
-  // useEffect(() => {
-
-  //     api.fetchPicture(nextName, nextPage)
-  //     .then((data) => {
-  //       this.setState(
-  //         { pictures: nextPage > 1 ? [...prevState.pictures, ...data.hits] : data.hits })
-  //     })
-  //       .catch(error => setError(error, 'rejected'))
-    
-  // }, [page])
-  
-  
 
   // onLoadMore() {
   //   this.setState((prevState) => ({
