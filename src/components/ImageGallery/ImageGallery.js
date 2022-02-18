@@ -51,6 +51,8 @@ export default function ImageGallery({pictureName, openModalIMG}) {
       
 //     }
 //   }
+  
+  
 
   useEffect(() => {  
     if (pictureName === '') {
@@ -59,15 +61,18 @@ export default function ImageGallery({pictureName, openModalIMG}) {
     setStatus('pending')
 
       api
-        .fetchPicture(pictureName)
+        .fetchPicture(pictureName, page)
         .then((data) => {
+          setPictures((prevPictures) => page > 1 ? [...prevPictures, ...data.hits] : data.hits)
           setStatus('resolved')
-          setPictures(data.hits)
           if (data.total === 0) {
             return Promise.reject(new Error(`Error search result, try again`))
           }
       })
-      .catch(error => setError(error))
+        .catch(error => {
+          setError(error);
+          setStatus('rejected')
+        })
     
   }, [pictureName, page])
   
