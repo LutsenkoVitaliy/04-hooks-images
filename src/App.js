@@ -15,6 +15,7 @@ export default function App() {
   const [pictureName, setPictureName] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalImg, setModalImg] = useState({})
+  const [page, setPage] = useState(1);
   
    
   // handleSearchSubmit = pictureName => {
@@ -22,6 +23,7 @@ export default function App() {
   // }
   const handleSearchSubmit = pictureName => {
     setPictureName(pictureName)
+    setPage(1)
   }
 
   // toggleModal = () => {
@@ -53,7 +55,7 @@ export default function App() {
     return (
       <div className='App'>
         {!showModal && <Searchbar onSearchSubmit={handleSearchSubmit} />}
-        <ImageGallery pictureName={pictureName} openModalIMG={openModalIMG}/>
+        <ImageGallery pictureName={pictureName} openModalIMG={openModalIMG} page={page} setPage={setPage}/>
         
         {showModal &&
           <Modal onClose={toggleModal}>

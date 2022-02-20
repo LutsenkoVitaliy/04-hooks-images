@@ -7,7 +7,7 @@ import Loader from "../Loader"
 import Button from "../Button";
 import api from "../../services/pixabayAPI"
 
-export default function ImageGallery({pictureName, openModalIMG}) {
+export default function ImageGallery({pictureName, openModalIMG, page, setPage}) {
   // state = {
   //   pictures: [],
   //   page: 1,
@@ -15,7 +15,6 @@ export default function ImageGallery({pictureName, openModalIMG}) {
   //   status: 'idle'
   // } 
   const [pictures, setPictures] = useState([]);
-  const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('idle');
 
